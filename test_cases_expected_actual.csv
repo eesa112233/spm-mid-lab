@@ -1,0 +1,21 @@
+﻿ID,Test case,Expected result,Actual result,Status
+TC01,All seven application views,Each of seven GUI views displays successfully,All seven views returned HTTP 200 and a rendered main region,PASS
+TC02,Case study initial records,"Five-million-PKR baseline, November 23 deadline, seven team members and hospital stakeholders","Budget 5,000,000; original deadline 2026-11-23; seven members and four stakeholder records",PASS
+TC03,16-week schedule with dependent delay,Original completion Nov 23; five-day task delay moves downstream tasks and finish to Nov 28,Baseline 2026-11-23; forecast 2026-11-28; downstream slips calculated,PASS
+TC04,EVM calculations,"PV=4,100,000; EV=3,760,000; AC=3,930,000; CPI=.957; SPI=.917","PV 4,100,000; EV 3,760,000; AC 3,930,000; CPI 0.957; SPI 0.917",PASS
+TC05,Pending change has no effects,Budget remains 5m and 16 weeks; six requirements and eight tasks,No impact before approval; 6 requirements and 8 tasks,PASS
+TC06,Approve AI and mobile change,"Budget increases 800k; deadline +21 days; approved req, WBS and task added",Approved budget 5.8m; approved deadline 2026-12-14; new REQ/WBS/activity; finish 2026-12-19,PASS
+TC07,Reject double approval,Duplicate decision rejected and baseline only changed once,HTTP 400 for repeat; 9 tasks; approved budget remains 5.8m,PASS
+TC08,Reject pending change,"No scope, schedule or budget adjustments",Budget still 5m; deadline Nov 23; same task/requirement counts,PASS
+TC09,Proposed requirement scope gate,Proposed requirement cannot be added to approved WBS,HTTP 400 when non-approved requirement used; no new work package,PASS
+TC10,Validate negative expenditure,Negative cost is rejected without database change,HTTP 400; number of expenses unchanged,PASS
+TC11,Actual expense changes CPI,70k new spending changes AC to 4m and CPI to .940; warning raised,"AC 4,000,000; CPI 0.940; cost-performance warning appears",PASS
+TC12,Work progress changes earned value,Raising T6 progress to 80% increases earned value by 170k,"EV increased by exactly PKR 170,000",PASS
+TC13,Cycle detection with rollback,Illegal T1↔T8 dependency rejected and existing dependency preserved,HTTP 400; saved T1 dependency remains null,PASS
+TC14,Defect status update,Resolving one critical defect lowers unresolved critical count to one,Unresolved critical defects fell from 2 to 1,PASS
+TC15,Risk matrix / PDPC,Likelihood × impact scores ordered descending and actions populated,Highest risk score 20/25 and prevention/correction actions stored,PASS
+TC16,Project closure protection,Closed project blocks edits; reopening is possible,Closure date saved; edit blocked HTTP 400; reopened successfully,PASS
+TC17,Save inspection and milestone,Quality inspection and milestone stored persistently,Inspection count and milestone count each increased by one,PASS
+TC18,Reject missing links / invalid score,Missing dependency and invalid risk likelihood raise validation errors,Missing dependency and out-of-range likelihood produced ValueError,PASS
+TC19,Cost-only change,Budget increases 100k without altering deadline or completion forecast,Approved budget 5.1m; deadline unchanged; forecast stays Nov 28,PASS
+TC20,Reject unknown WBS activity,Unlinked activity work package cannot be saved,HTTP 400 and no new activity inserted,PASS
